@@ -47,6 +47,14 @@ void AP_MotorsTailsitter::init(motor_frame_class frame_class, motor_frame_type f
     SRV_Channels::set_aux_channel_default(SRV_Channel::k_tiltMotorLeft, CH_4);
     SRV_Channels::set_angle(SRV_Channel::k_tiltMotorLeft, SERVO_OUTPUT_RANGE);
 
+    // A-tail motor init
+    // Right A-tail to CH_5
+    SRV_Channels::set_aux_channel_default(SRV_Channel::k_vtail_left, CH_5);
+    SRV_Channels::set_angle(SRV_Channel::k_vtail_left, SERVO_OUTPUT_RANGE);
+    // Right A-tail to CH_6
+    SRV_Channels::set_aux_channel_default(SRV_Channel::k_vtail_right, CH_6);
+    SRV_Channels::set_angle(SRV_Channel::k_vtail_right, SERVO_OUTPUT_RANGE);
+
     _mav_type = MAV_TYPE_VTOL_DUOROTOR;
 
     // record successful initialisation if what we setup was the desired frame_class
@@ -109,6 +117,10 @@ void AP_MotorsTailsitter::output_to_motors()
     SRV_Channels::set_output_scaled(SRV_Channel::k_tiltMotorLeft, _tilt_left*SERVO_OUTPUT_RANGE);
     SRV_Channels::set_output_scaled(SRV_Channel::k_tiltMotorRight, _tilt_right*SERVO_OUTPUT_RANGE);
 
+    // A-tail code
+    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_left, _tilt_left*SERVO_OUTPUT_RANGE);
+    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_right, _tilt_right*SERVO_OUTPUT_RANGE);
+    
 }
 
 // get_motor_mask - returns a bitmask of which outputs are being used for motors (1 means being used)
