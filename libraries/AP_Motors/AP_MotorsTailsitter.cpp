@@ -118,8 +118,8 @@ void AP_MotorsTailsitter::output_to_motors()
     SRV_Channels::set_output_scaled(SRV_Channel::k_tiltMotorRight, _tilt_right*SERVO_OUTPUT_RANGE);
 
     // A-tail code
-    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_left, _tilt_left*SERVO_OUTPUT_RANGE);
-    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_right, _tilt_right*SERVO_OUTPUT_RANGE);
+    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_left, _Atail_left*SERVO_OUTPUT_RANGE);
+    SRV_Channels::set_output_scaled(SRV_Channel::k_vtail_right, _Atail_right*SERVO_OUTPUT_RANGE);
     
 }
 
@@ -223,6 +223,12 @@ void AP_MotorsTailsitter::output_armed_stabilizing()
     // thrust vectoring
     _tilt_left  = pitch_thrust - yaw_thrust;
     _tilt_right = pitch_thrust + yaw_thrust;
+
+    // tail vectoring
+    // its the same as tilt rotors?
+    _Atail_left = _tilt_left;
+    _Atail_right = _tilt_right;
+
 }
 
 // output_test_seq - spin a motor at the pwm value specified
